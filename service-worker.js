@@ -1,28 +1,15 @@
-const CACHE_NAME = 'v1';
-const urlsToCache = [
-    '/',
-    '/styles/main.css',
-    '/scripts/main.js'
-];
-
-self.addEventListener('install', event => {
-    event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then(cache => {
-                return cache.addAll(urlsToCache);
-            })
-    );
+self.addEventListener('install', function(event) {
+    self.skipWaiting();
 });
 
-self.addEventListener('fetch', event => {
-    event.respondWith(
-        caches.match(event.request)
-            .then(response => {
-                    if (response) {
-                        return response;
-                    }
-                    return fetch(event.request);
-                }
-            )
-    );
+self.addEventListener('activate', function(event) {
+    event.waitUntil(self.clients.claim());
+});
+
+self.addEventListener('fetch', function(event) {
+    if (event.request.url.endsWith('/data')) {
+        event.respondWith(
+            new Response('Це відповідь, змінена Service Worker!')
+        );
+    }
 });

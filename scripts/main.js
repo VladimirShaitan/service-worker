@@ -1,9 +1,12 @@
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js')
-        .then(function(registration) {
-            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('/data')
+        .then(function(response) {
+            return response.text();
+        })
+        .then(function(data) {
+            document.getElementById('content').innerText = data;
         })
         .catch(function(err) {
-            console.log('ServiceWorker registration failed: ', err);
+            console.error('Помилка:', err);
         });
-}
+});
