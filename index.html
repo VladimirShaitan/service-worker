@@ -8,7 +8,15 @@
 </head>
 <body>
 <h1>Вітаємо на демо-сайті!</h1>
-<p>Це демонстраційний контент.</p>
+<p>Введіть дані для синхронізації:</p>
+<form id="syncForm">
+    <label>
+        <input type="text" placeholder="Введіть дані тут">
+    </label>
+    <button type="submit">Відправити</button>
+</form>
+<script src="https://cdn.jsdelivr.net/npm/localforage@1.10.0/dist/localforage.min.js"></script>
 <script src="scripts/main.js"></script>
+<script src="scripts/sync.js"></script>
 </body>
 </html>
